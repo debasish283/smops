@@ -12,7 +12,7 @@ require('dotenv').config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/product", router);
+app.use("/customerProfile", router);
 
 app.listen(port, () => {
   console.log("server started at port: ", port);

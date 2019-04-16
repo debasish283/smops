@@ -18,4 +18,17 @@ let nap_input = new Schema(
   },
   { strict: false }
 );
+
+let CustomerProfileSchema = new Schema({
+    customerName: {type: String, required: true},
+    industry: {type: String, required: true},
+    customerId: {type: Number, required: true},
+    sowNo: {type: Number, required: true},
+    sowStartDate: {type: Date, required: true},
+    sowEndDate: {type: Date, required: true},
+    spocEmail: {type: String, required: true},
+    isActive: {type: Boolean, required: true}
+});
+
 mongoose.model("nap_input", nap_input);
+mongoose.model("CustomerProfileSchema", CustomerProfileSchema);

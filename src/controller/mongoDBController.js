@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import db from "../model/napModel";
-const nap_input = mongoose.model("nap_input");
+import db from "../model/customerModel";
+const CustomerProfileSchema = mongoose.model("CustomerProfileSchema");
 
 let mongoDBController = {
   getAllData: (req, res) => {
     // res.send("hi thereee")
-    nap_input.find({}, (err, data) => {
+    CustomerProfileSchema.find({}, (err, data) => {
       if (err) {
         res.status(500).send(err);
       }
@@ -17,11 +17,17 @@ let mongoDBController = {
     });
   },
   insertData: (req, res) => {
-    let nap_config = new nap_input({
-      name: req.body.name,
-      price: req.body.price
+    let customer_config = new CustomerProfileSchema({
+        customerName: req.body.customerName,
+        industry: req.body.industry,
+        customerId: req.body.customerId,
+        sowNo: req.body.sowNo,
+        sowStartDate: req.body.sowStartDate,
+        sowEndDate: req.body.sowEndDate,
+        spocEmail: req.body.spocEmail,
+        isActive: req.body.isActive
     });
-    nap_config.save((err, data) => {
+    customer_config.save((err, data) => {
       if (err) {
         res.status(500).send(err);
       }
@@ -31,6 +37,18 @@ let mongoDBController = {
         res.status(404).send();
       }
     })
+  },
+  getDataById: (req, res) => {
+    CustomerProfileSchema.findById({_id: req.params.id}, (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      if (data) {
+        res.status(200).send(data);
+      } else {
+        res.status(404).send();
+      }
+    });
   }
 }
 
