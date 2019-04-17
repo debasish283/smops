@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-import router from "./customerProfile/customerProfile.routes"
+import cors from 'cors';
+import router from "./customerProfile/customerProfile.routes";
 
 import mongoose from "mongoose";
 
@@ -8,7 +9,14 @@ const app = express();
 const port = process.env.PORT || 1234;
 require('dotenv').config();
 
-
+app.use(cors({
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false
+  }));
+  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
