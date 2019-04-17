@@ -5,19 +5,11 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true });
 let db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "connection error"));
-db.once("open", function(callback) {
-  console.log("connection succeeded for NAP models");
-});
+// db.once("open", function(callback) {
+//   console.log("connection succeeded for NAP models");
+// });
 
 let Schema = mongoose.Schema;
-
-let nap_input = new Schema(
-  {
-    name: { type: String, unique: true, required: true },
-    price: { type: Number, required: true }
-  },
-  { strict: false }
-);
 
 let CustomerProfileSchema = new Schema({
     customerName: {type: String, required: true},
@@ -30,5 +22,4 @@ let CustomerProfileSchema = new Schema({
     isActive: {type: Boolean, required: true}
 });
 
-mongoose.model("nap_input", nap_input);
 mongoose.model("CustomerProfileSchema", CustomerProfileSchema);
